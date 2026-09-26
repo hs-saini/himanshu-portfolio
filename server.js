@@ -167,15 +167,16 @@ async function withDataLock(req, res, next) {
   }
 }
 
-const diskStorage = multer.diskStorage({
-  destination: UPLOAD_DIR,
-  filename: (req, file, callback) => {
-    const extension = path.extname(file.originalname).toLowerCase();
-    callback(null, `${Date.now()}-${crypto.randomBytes(6).toString('hex')}${extension}`);
-  }
-});
 const upload = multer({
-  storage: IS_VERCEL ? multer.memoryStorage() : diskStorage,
+  storage: IS_VERCEL
+    ? multer.memoryStorage()
+    : multer.diskStorage({
+        destination: UPLOAD_DIR,
+        filename: (req, file, callback) => {
+          const extension = path.extname(file.originalname).toLowerCase();
+          callback(null, `${Date.now()}-${crypto.randomBytes(6).toString('hex')}${extension}`);
+        }
+      }),
   limits: { fileSize: 4 * 1024 * 1024 },
   fileFilter: (req, file, callback) => {
     if (!['image/jpeg', 'image/png', 'image/webp', 'image/gif'].includes(file.mimetype)) {
