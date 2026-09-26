@@ -1,0 +1,23 @@
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{overflow-x:hidden}
+.navbar{position:sticky;top:0;z-index:1030;background:rgba(13,19,31,.92)!important;backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.09);box-shadow:0 8px 30px rgba(0,0,0,.16)}
+.navbar-brand{display:flex;align-items:center;letter-spacing:.01em}
+.navbar-brand img{border:2px solid rgba(128,240,193,.8);box-shadow:0 0 18px rgba(128,240,193,.2)}
+.navbar .nav-link{position:relative;margin-inline:3px;transition:color .2s ease}
+.navbar .nav-link:hover,.navbar .nav-link:focus{color:#80f0c1!important}
+.navbar .nav-link:after{position:absolute;content:"";left:.5rem;right:.5rem;bottom:3px;height:2px;background:#80f0c1;transform:scaleX(0);transform-origin:left;transition:transform .2s ease}
+.navbar .nav-link:hover:after,.navbar .nav-link:focus:after{transform:scaleX(1)}
+.hero{position:relative;isolation:isolate;overflow:hidden;background-image:radial-gradient(ellipse at 18% 18%,rgba(128,240,193,.25),transparent 40%),linear-gradient(135deg,#0e1b31,#252056 58%,#116354)!important}
+.hero:after{content:"";position:absolute;z-index:-1;width:340px;height:340px;border:1px solid rgba(255,255,255,.12);border-radius:50%;right:-90px;bottom:-190px;box-shadow:0 0 0 35px rgba(255,255,255,.025),0 0 0 70px rgba(255,255,255,.02)}
+.hero h1{letter-spacing:-.04em}
+.section h2{letter-spacing:-.035em}
+.card,.contact-info{border:1px solid rgba(128,240,193,.11);border-radius:16px;overflow:hidden;transition:transform .28s ease,box-shadow .28s ease}
+.card:hover{transform:translateY(-7px);box-shadow:0 18px 44px rgba(0,0,0,.2)}
+.footer{position:relative;overflow:hidden;background:linear-gradient(135deg,#0b1220,#111d31 65%,#123a35)!important;border-top:1px solid rgba(128,240,193,.2);padding:54px 0 30px!important}
+.footer h5{font-family:'Segoe UI',sans-serif;font-size:1.3rem;letter-spacing:.03em}
+.footer p{margin:22px 0 0;color:#b7c4d7}
+.footer a{color:#9bf2ce;text-decoration:none}
+.footer a:hover{text-decoration:underline}
+.social-icons a{display:inline-grid;place-items:center;width:42px;height:42px;border:1px solid rgba(255,255,255,.16);border-radius:50%;margin:6px!important;background:rgba(255,255,255,.05);transition:transform .2s ease,background .2s ease}
+.social-icons a:hover{transform:translateY(-3px);background:rgba(128,240,193,.15)}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.navbar .nav-link,.card,.social-icons a{transition:none!important}}

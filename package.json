@@ -1,0 +1,29 @@
+{
+  "name": "himanshu-portfolio",
+  "version": "1.0.0",
+  "description": "Himanshu Saini's portfolio website and content management dashboard",
+  "main": "server.js",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "dependencies": {
+    "@upstash/redis": "^1.39.0",
+    "@vercel/blob": "^2.8.0",
+    "express": "^5.2.1",
+    "multer": "^2.4.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  },
+  "keywords": [
+    "portfolio",
+    "web",
+    "admin-dashboard"
+  ],
+  "author": "Himanshu Saini",
+  "license": "ISC"
+}

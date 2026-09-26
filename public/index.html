@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-adsense-account" content="ca-pub-4835126048293074">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4835126048293074"
+     crossorigin="anonymous"></script>
+    <title>Himanshu Saini - Portfolio</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="portfolio.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #007bff;
+            --secondary-color: #6c757d;
+            --dark-bg: #121212;
+            --light-bg: #ffffff;
+            --text-dark: #333;
+            --text-light: #f8f9fa;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        body.dark-mode {
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+        }
+
+        body.light-mode {
+            background-color: var(--light-bg);
+            color: var(--text-dark);
+        }
+
+        .hero {
+            background: linear-gradient(135deg, var(--primary-color), #6610f2);
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            animation: fadeInUp 1s ease-out 0.5s both;
+        }
+
+        .btn-custom {
+            background: rgba(255,255,255,0.2);
+            border: 2px solid white;
+            color: white;
+            transition: all 0.3s;
+        }
+
+        .btn-custom:hover {
+            background: white;
+            color: var(--primary-color);
+        }
+
+        .section {
+            padding: 80px 0;
+        }
+
+        body.dark-mode .bg-light {
+            background-color: #222 !important;
+        }
+
+        body.dark-mode .form-control {
+            background-color: #333;
+            color: white;
+            border-color: #555;
+        }
+
+        body.dark-mode .form-control:focus {
+            background-color: #333;
+            color: white;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+        }
+
+        body.dark-mode .form-label {
+            color: var(--text-light);
+        }
+
+        .profile-img {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 5px solid var(--primary-color);
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .certificate-card {
+            border: none;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .certificate-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .skill-bar {
+            background: #e9ecef;
+            border-radius: 10px;
+            height: 10px;
+            margin-bottom: 20px;
+        }
+
+        .skill-fill {
+            background: var(--primary-color);
+            height: 100%;
+            border-radius: 10px;
+            transition: width 1s;
+        }
+
+        .skill-95 { width: 95%; }
+        .skill-90 { width: 90%; }
+        .skill-85 { width: 85%; }
+        .skill-80 { width: 80%; }
+        .skill-88 { width: 88%; }
+        .skill-75 { width: 75%; }
+
+        .project-img {
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .whatsapp-button {
+            position: fixed;
+            bottom: 110px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background: #25D366;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            z-index: 1000;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .whatsapp-button:hover {
+            transform: scale(1.1);
+            background: #128C7E;
+        }
+
+        .whatsapp-label {
+            position: fixed;
+            bottom: 175px;
+            right: 20px;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 12px;
+            z-index: 1000;
+            white-space: nowrap;
+        }
+
+        .theme-toggle {
+            z-index: 1000;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .navbar-brand {
+            font-weight: bold;
+        }
+
+        .footer {
+            background: #343a40;
+            color: white;
+            padding: 40px 0;
+        }
+
+        .social-icons a {
+            color: white;
+            margin: 0 10px;
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+
+        .social-icons a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Virtual Assistant Styles */
+        .chat-label {
+            position: fixed;
+            bottom: 85px;
+            right: 20px;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 12px;
+            z-index: 1000;
+        }
+
+        .chat-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            z-index: 1000;
+            transition: all 0.3s;
+        }
+
+        .chat-button:hover {
+            transform: scale(1.1);
+        }
+
+        .chat-window {
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            width: 300px;
+            height: 400px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            display: none;
+            flex-direction: column;
+            z-index: 1001;
+        }
+
+        .chat-header {
+            background: var(--primary-color);
+            color: white;
+            padding: 10px;
+            border-radius: 10px 10px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chat-body {
+            flex: 1;
+            padding: 10px;
+            overflow-y: auto;
+            background: #f8f9fa;
+        }
+
+        .message {
+            margin-bottom: 10px;
+            padding: 8px 12px;
+            border-radius: 10px;
+            max-width: 80%;
+        }
+
+        .message.user {
+            background: var(--primary-color);
+            color: white;
+            align-self: flex-end;
+            margin-left: auto;
+        }
+
+        .message.assistant {
+            background: #e9ecef;
+            color: #333;
+        }
+
+        .chat-footer {
+            padding: 10px;
+            border-top: 1px solid #ddd;
+            display: flex;
+        }
+
+        .chat-footer input {
+            flex: 1;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            padding: 8px 12px;
+            margin-right: 10px;
+        }
+
+        .chat-footer button {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 20px;
+            padding: 8px 15px;
+            cursor: pointer;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .hero {
+                padding: 60px 0;
+            }
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            .hero p {
+                font-size: 1.1rem;
+            }
+            .section {
+                padding: 40px 0;
+            }
+            .section h2 {
+                font-size: 1.8rem;
+            }
+            .chat-window {
+                width: 90%;
+                height: 70%;
+                right: 5%;
+                bottom: 5%;
+            }
+            .theme-toggle {
+                top: 10px;
+                left: 10px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            .hero p {
+                font-size: 1rem;
+            }
+            .section h2 {
+                font-size: 1.5rem;
+            }
+            .navbar-brand {
+                font-size: 1.2rem;
+            }
+            .profile-img {
+                max-width: 200px;
+            }
+            .theme-toggle {
+                padding: 0.25rem 0.5rem;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body class="dark-mode">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="index.html"><img src="sainihimanshu.jpg" alt="Himanshu Saini" class="rounded-circle me-2" style="width: 30px; height: 30px;" loading="lazy"> Himanshu Saini</a>
+            <button class="btn btn-secondary theme-toggle d-lg-none me-2" data-bs-toggle="modal" data-bs-target="#themeModal"><i class="fas fa-palette"></i></button>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#certificates">Certificates</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About Page</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact Page</a></li>
+                    <li class="nav-item"><a class="nav-link" href="privacy.html">Privacy</a></li>
+                    <li class="nav-item"><a class="nav-link" href="terms.html">Terms</a></li>
+                    <li class="nav-item"><a class="nav-link" href="admin.html">Admin</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Theme Modal -->
+    <div class="modal fade" id="themeModal" tabindex="-1" aria-labelledby="themeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="themeModalLabel">Choose Theme</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <button class="btn btn-outline-primary me-2" onclick="setTheme('light')">Light Mode</button>
+                    <button class="btn btn-outline-dark" onclick="setTheme('dark')">Dark Mode</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="hero">
+        <div class="container">
+            <h1 data-aos="fade-up">Hi, I'm Himanshu Saini</h1>
+            <p data-aos="fade-up" data-aos-delay="200">Web Designer & Developer</p>
+            <a href="#contact" class="btn btn-custom btn-lg">Hire Me</a>
+            <a href="#projects" class="btn btn-outline-light btn-lg ms-3">View Work</a>
+        </div>
+    </section>
+
+    <section id="about" class="section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6" data-aos="fade-right">
+                    <img src="sainihimanshu.jpg" alt="Himanshu Saini" class="profile-img">
+                </div>
+                <div class="col-md-6" data-aos="fade-left">
+                    <h2>About Me</h2>
+                    <p>I am a passionate web designer and developer with expertise in creating beautiful, responsive websites. I love bringing ideas to life through code and design.</p>
+                    <p>With years of experience in HTML, CSS, JavaScript, and various frameworks, I create stunning digital experiences that engage users and drive results.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="section bg-light">
+        <div class="container">
+            <h2 class="text-center mb-5" data-aos="fade-up">Skills</h2>
+            <div class="row" id="skills-container"></div>
+        </div>
+    </section>
+
+    <section id="certificates" class="section bg-light">
+        <div class="container">
+            <h2 class="text-center mb-5" data-aos="fade-up">Certificates</h2>
+            <div class="row" id="certificates-container">
+                <!-- Certificates will be loaded dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="section">
+        <div class="container">
+            <h2 class="text-center mb-5" data-aos="fade-up">Projects</h2>
+            <div class="row" id="projects-container"></div>
+        </div>
+    </section>
+
+    <section id="contact" class="section bg-light">
+        <div class="container">
+            <h2 class="text-center mb-5" data-aos="fade-up">Contact Me</h2>
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <form id="contact-form" action="/contact" method="POST">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Full Name</label>
+                            <input type="text" name="name" class="form-control" id="name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" name="email" class="form-control" id="email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="message" class="form-label">Project Details</label>
+                            <textarea name="message" class="form-control" id="message" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                    <div id="form-message" class="mt-3 text-center"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container text-center">
+            <h5>Himanshu Saini</h5>
+            <div class="social-icons">
+                <a href="https://www.instagram.com/sainii._.himanshu?igsh=NWhueXQzZGNqcGIy" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://x.com/Himansh75026447" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="https://www.linkedin.com/in/himanshu-saini-b1676b390" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="https://www.youtube.com/@Desibalakgammaale-top" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+            </div>
+            <p>&copy; <span class="current-year"></span> Himanshu Saini Portfolio. <a href="privacy.html">Privacy</a> | <a href="terms.html">Terms</a></p>
+        </div>
+    </footer>
+
+    <div class="whatsapp-label">Chat with me on WhatsApp</div>
+    <a href="https://wa.me/917906156268" target="_blank" rel="noopener noreferrer" class="whatsapp-button" title="Chat on WhatsApp" aria-label="Chat on WhatsApp">
+        <i class="fab fa-whatsapp fa-lg"></i>
+    </a>
+
+    <!-- Virtual Assistant -->
+    <div class="chat-label">I'm Virtual Assistant</div>
+    <div class="chat-button" onclick="toggleChat()">
+        <i class="fas fa-comments"></i>
+    </div>
+    <div class="chat-window" id="chatWindow">
+        <div class="chat-header">
+            <span>Virtual Assistant</span>
+            <button onclick="toggleChat()">&times;</button>
+        </div>
+        <div class="chat-body" id="chatBody">
+            <div class="message assistant">Hello! How can I help you today?</div>
+        </div>
+        <div class="chat-footer">
+            <input type="text" id="chatInput" placeholder="Type your message...">
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="portfolio.js"></script>
+    <script>
+        AOS.init();
+
+        function setTheme(theme) {
+            if (theme === 'dark') {
+                document.body.classList.remove('light-mode');
+                document.body.classList.add('dark-mode');
+            } else {
+                document.body.classList.remove('dark-mode');
+                document.body.classList.add('light-mode');
+            }
+
+            const themeModal = document.getElementById('themeModal');
+            if (themeModal && window.bootstrap && bootstrap.Modal) {
+                const modal = bootstrap.Modal.getInstance(themeModal);
+                if (modal) modal.hide();
+            }
+        }
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const targetId = this.getAttribute('href');
+                if (!targetId || targetId === '#') {
+                    return;
+                }
+                const target = document.querySelector(targetId);
+                if (!target) {
+                    return;
+                }
+                e.preventDefault();
+                target.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        function toggleChat() {
+            const chatWindow = document.getElementById('chatWindow');
+            if (!chatWindow) return;
+            chatWindow.style.display = chatWindow.style.display === 'flex' ? 'none' : 'flex';
+        }
+
+        const qa = {
+            "hi": "Hello! How can I help you today?",
+            "hello": "Hi there! What would you like to know?",
+            "what is your name?": "My name is Himanshu Saini.",
+            "who are you?": "I'm a virtual assistant here to answer your questions about my portfolio.",
+            "where are you located?": "I'm based in Uttar Pradesh, India.",
+            "what services do you offer?": "I offer web design and development services, including responsive websites and UI/UX design.",
+            "how can i contact you?": "You can use the contact form on this site or email me directly via the address on the contact page.",
+            "what technologies do you use?": "I work with HTML, CSS, JavaScript, Bootstrap, and other modern web technologies.",
+            "are you available for freelance work?": "Yes, I am available for freelance projects. Feel free to reach out!",
+            "do you have a portfolio?": "Yes, this website itself showcases my projects and skills.",
+            "what is your experience?": "I have several years of experience in web development working with clients across different industries.",
+            "can you build e-commerce sites?": "Absolutely! I can build secure and responsive e-commerce websites with payment integration.",
+            "do you provide maintenance?": "Yes, I offer maintenance and updates for websites after launch.",
+            "how long does a project take?": "Project timelines vary, but typically a simple site takes 1-2 weeks.",
+            "what is your hourly rate?": "Rates depend on the project; please contact me for a quote.",
+            "can you work with my design?": "Yes, I can implement designs provided by clients or help create new ones.",
+            "do you optimize for seo?": "I build websites with SEO best practices in mind, including proper structure and performance.",
+            "do you offer hosting?": "I can assist with hosting setup and deployment guidance.",
+            "what is responsive design?": "Responsive design ensures your website looks good on all devices, from phones to desktops.",
+            "what is bootstrap?": "Bootstrap is a CSS framework that makes responsive web design easier.",
+            "can you create animations?": "Yes, I use CSS and JavaScript libraries like AOS for animations.",
+            "do you write custom code?": "I write custom HTML, CSS, and JavaScript tailored to client needs.",
+            "what frameworks do you know?": "I use Bootstrap and can work with React or other frameworks if needed.",
+            "can you integrate apis?": "Yes, I can integrate various APIs for functionality such as payment gateways or data services.",
+            "what is your design style?": "I focus on clean, modern, and user-friendly designs.",
+            "what languages do you code in?": "Primarily HTML, CSS, JavaScript; also familiar with PHP and Node.js.",
+            "how do i start a project?": "Contact me through the form, and we can discuss your requirements.",
+            "do you use git?": "Yes, I use Git for version control and can share code via repositories.",
+            "can you work remotely?": "Yes, I work remotely and collaborate via online tools.",
+            "do you have testimonials?": "Testimonials and client feedback can be added to the portfolio section.",
+            "what is your availability?": "Availability varies; please inquire via the contact form.",
+            "can you redesign my website?": "Certainly! I can refresh or completely redesign existing sites.",
+            "do you offer training?": "I can provide basic training on how to manage your website after launch.",
+            "what is a domain?": "A domain is your website's address, like example.com.",
+            "what is hosting?": "Hosting is the service that keeps your website online.",
+            "do you offer logo design?": "Yes, I can design or integrate logos into your website.",
+            "can you translate my site?": "I can help make your site multilingual.",
+            "what is a cms?": "A CMS (Content Management System) allows you to manage site content easily.",
+            "do you use wordpress?": "I primarily build custom sites but can work with WordPress if required.",
+            "how do i update my site?": "You can update content via a CMS I set up, or I can make changes for you.",
+            "do you provide backups?": "Yes, I can set up regular backups for your website.",
+            "what is mobile-first design?": "Designing for mobile devices first ensures better mobile usability.",
+            "can you optimize performance?": "Yes, I optimize images and code to improve load times.",
+            "do you use svg?": "SVG graphics are supported and great for scalability.",
+            "what is a favicon?": "A small icon shown in browser tabs representing your site.",
+            "how do i add social links?": "I can add social icons that link to your profiles.",
+            "do you fix bugs?": "Yes, bug fixing is part of my development process.",
+            "what is ui/ux?": "UI is user interface; UX is user experience – design elements that make a site intuitive.",
+            "can you integrate maps?": "Yes, I can embed Google Maps or other map services.",
+            "do you provide analytics?": "I can integrate tools like Google Analytics for tracking.",
+            "what is ssl?": "SSL encrypts data between user and site; it's essential for security.",
+            "do you set up email?": "I can help configure professional email addresses with your domain.",
+            "what is a landing page?": "A standalone web page focused on a specific goal, like capturing leads.",
+            "can you integrate chatbots?": "Yes, chatbots can be added for user interaction.",
+            "what is seo optimization?": "Improving your site's visibility in search engine results.",
+            "do you support?": "I provide ongoing support for clients as needed.",
+            "what payment methods do you integrate?": "Common methods include PayPal, Stripe, and others.",
+            "can you do custom forms?": "Yes, custom forms with validation and submission functionality.",
+            "do you use gitlab?": "I prefer GitHub but can use GitLab as well.",
+            "can you animate elements?": "Yes, animations can be done with CSS or JavaScript libraries.",
+            "what is cross-browser compatibility?": "Ensuring a site works well across different web browsers.",
+            "do you follow accessibility standards?": "I design with accessibility in mind, following WCAG guidelines.",
+            "what is dark mode?": "A theme variation with dark background colors; this site supports it.",
+            "what is javascript?": "A programming language for creating interactive web pages.",
+            "do you know python?": "I have basic familiarity with Python for scripting and automation.",
+            "what is html?": "HyperText Markup Language – the standard language for web pages.",
+            "what is css?": "Cascading Style Sheets – used for styling HTML content.",
+            "what is seo?": "Search Engine Optimization – improving site visibility in search engines.",
+            "what is github?": "A platform for hosting Git repositories and collaborating on code."
+        };
+
+        let managedChatReplies = [];
+        fetch('/api/chat/replies')
+            .then(response => response.ok ? response.json() : [])
+            .then(items => { managedChatReplies = Array.isArray(items) ? items : []; })
+            .catch(() => {});
+
+        function sendMessage() {
+            const input = document.getElementById('chatInput');
+            if (!input) return;
+
+            const message = input.value.trim();
+            if (!message) return;
+
+            addMessage(message, 'user');
+            input.value = '';
+
+            const key = message.toLowerCase();
+            let response = qa[key];
+            const managedReply = managedChatReplies.find(item => key.includes(String(item.text || '').toLowerCase()));
+            if (managedReply && managedReply.text) response = managedReply.text;
+            if (!response) {
+                for (const q in qa) {
+                    if (key.includes(q)) {
+                        response = qa[q];
+                        break;
+                    }
+                }
+            }
+            if (!response) {
+                response = managedChatReplies.length
+                    ? managedChatReplies[Math.floor(Math.random() * managedChatReplies.length)].text
+                    : 'Thank you for your message! Himanshu will get back to you soon.';
+            }
+            fetch('/chat', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ sender: 'visitor', text: message }) }).catch(() => {});
+            setTimeout(() => {
+                addMessage(response, 'assistant');
+            }, 500);
+        }
+
+        function addMessage(text, sender) {
+            const chatBody = document.getElementById('chatBody');
+            if (!chatBody) return;
+
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${sender}`;
+            messageDiv.textContent = text;
+            chatBody.appendChild(messageDiv);
+            chatBody.scrollTop = chatBody.scrollHeight;
+        }
+
+        const chatInput = document.getElementById('chatInput');
+        if (chatInput) {
+            chatInput.addEventListener('keypress', function (e) {
+                if (e.key === 'Enter') {
+                    sendMessage();
+                }
+            });
+        }
+
+        const contactForm = document.getElementById('contact-form');
+        if (contactForm) {
+            contactForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+                const formData = new FormData(this);
+                fetch('/contact', {
+                    method: 'POST',
+                    body: JSON.stringify(Object.fromEntries(formData.entries())),
+                    headers: { 'Content-Type': 'application/json' }
+                })
+                .then(async response => {
+                    const result = await response.json();
+                    if (!response.ok) throw new Error(result.message || 'Message could not be sent.');
+                    return result;
+                })
+                .then(response => {
+                    if (response.ok) {
+                        const formMessage = document.getElementById('form-message');
+                        if (formMessage) {
+                            formMessage.textContent = 'Thank you! Your message has been sent.';
+                            formMessage.style.color = 'green';
+                        }
+                        this.reset();
+                    } else {
+                        throw new Error('Form submission failed');
+                    }
+                })
+                .catch(() => {
+                    const formMessage = document.getElementById('form-message');
+                    if (formMessage) {
+                        formMessage.textContent = 'Oops! There was a problem sending your message.';
+                        formMessage.style.color = 'red';
+                    }
+                });
+            });
+        }
+
+        async function loadSkills() {
+            const container = document.getElementById('skills-container');
+            if (!container) return;
+
+            try {
+                const response = await fetch('/api/skills');
+                if (!response.ok) throw new Error('Skills fetch failed');
+                const skills = await response.json();
+                container.innerHTML = '';
+
+                if (!skills || skills.length === 0) {
+                    container.innerHTML = '<div class="col-12 text-center"><p>No skills added yet.</p></div>';
+                    return;
+                }
+
+                const leftCol = document.createElement('div');
+                leftCol.className = 'col-md-6';
+                leftCol.setAttribute('data-aos', 'fade-up');
+
+                const rightCol = document.createElement('div');
+                rightCol.className = 'col-md-6';
+                rightCol.setAttribute('data-aos', 'fade-up');
+
+                skills.forEach((skill, index) => {
+                    const skillDiv = document.createElement('div');
+                    const heading = document.createElement('h4');
+                    heading.textContent = skill.name || 'Skill';
+                    const bar = document.createElement('div');
+                    bar.className = 'skill-bar';
+                    const fill = document.createElement('div');
+                    fill.className = 'skill-fill';
+                    fill.style.width = `${Math.max(0, Math.min(100, Number(skill.percentage) || 0))}%`;
+                    bar.appendChild(fill);
+                    skillDiv.append(heading, bar);
+
+                    if (index % 2 === 0) leftCol.appendChild(skillDiv);
+                    else rightCol.appendChild(skillDiv);
+                });
+
+                container.appendChild(leftCol);
+                container.appendChild(rightCol);
+                if (window.AOS) AOS.refresh();
+            } catch (error) {
+                container.innerHTML = '<div class="col-12 text-center"><p>Unable to load skills.</p></div>';
+            }
+        }
+
+        async function loadCertificates() {
+            const container = document.getElementById('certificates-container');
+            if (!container) return;
+
+            try {
+                const response = await fetch('/api/certificates');
+                if (!response.ok) throw new Error('Certificates fetch failed');
+                const certificates = await response.json();
+                container.innerHTML = '';
+
+                if (!certificates || certificates.length === 0) {
+                    container.innerHTML = '<div class="col-12 text-center"><p>No certificates added yet.</p></div>';
+                    return;
+                }
+
+                certificates.forEach(cert => {
+                    const certDiv = document.createElement('div');
+                    certDiv.className = 'col-md-4 mb-4';
+                    certDiv.setAttribute('data-aos', 'fade-up');
+                    const card = document.createElement('div');
+                    card.className = 'card certificate-card';
+                    const body = document.createElement('div');
+                    body.className = 'card-body text-center';
+                    if (cert.imageUrl) {
+                        const image = document.createElement('img');
+                        image.src = cert.imageUrl;
+                        image.alt = cert.title || 'Certificate';
+                        image.className = 'certificate-img mb-3';
+                        image.style.cssText = 'width:60px;height:60px;object-fit:cover;border-radius:50%';
+                        body.appendChild(image);
+                    }
+                    const title = document.createElement('h5');
+                    title.className = 'card-title';
+                    title.textContent = cert.title || 'Certificate';
+                    const description = document.createElement('p');
+                    description.className = 'card-text';
+                    description.textContent = cert.description || '';
+                    body.append(title, description);
+                    card.appendChild(body);
+                    certDiv.appendChild(card);
+                    container.appendChild(certDiv);
+                });
+
+                if (window.AOS) AOS.refresh();
+            } catch (error) {
+                container.innerHTML = '<div class="col-12 text-center"><p>Unable to load certificates.</p></div>';
+            }
+        }
+
+        async function loadProjects() {
+            const container = document.getElementById('projects-container');
+            if (!container) return;
+            try {
+                const response = await fetch('/api/projects');
+                if (!response.ok) throw new Error('Projects fetch failed');
+                const projects = await response.json();
+                container.replaceChildren();
+                if (!Array.isArray(projects) || projects.length === 0) {
+                    container.innerHTML = '<div class="col-12 text-center"><p>No projects added yet.</p></div>';
+                    return;
+                }
+                projects.forEach((project, index) => {
+                    const column = document.createElement('div');
+                    column.className = 'col-md-4 mb-4';
+                    column.setAttribute('data-aos', 'fade-up');
+                    column.setAttribute('data-aos-delay', String((index % 3) * 120));
+                    const card = document.createElement('div');
+                    card.className = 'card h-100';
+                    if (project.imageUrl) {
+                        const image = document.createElement('img');
+                        image.src = project.imageUrl;
+                        image.alt = project.title || 'Portfolio project';
+                        image.className = 'card-img-top project-img';
+                        card.appendChild(image);
+                    }
+                    const body = document.createElement('div');
+                    body.className = 'card-body';
+                    const title = document.createElement('h5');
+                    title.className = 'card-title';
+                    title.textContent = project.title || 'Project';
+                    const description = document.createElement('p');
+                    description.className = 'card-text';
+                    description.textContent = project.description || '';
+                    body.append(title, description);
+                    card.appendChild(body);
+                    column.appendChild(card);
+                    container.appendChild(column);
+                });
+                if (window.AOS) AOS.refresh();
+            } catch (error) {
+                container.innerHTML = '<div class="col-12 text-center"><p>Unable to load projects.</p></div>';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            loadSkills();
+            loadCertificates();
+            loadProjects();
+        });
+    </script>
+</body>
+</html>
