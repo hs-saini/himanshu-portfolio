@@ -125,18 +125,6 @@
     });
   }
 
-  async function renderAboutPage() {
-    if (document.body.dataset.aboutPage !== 'true') return;
-    const skillsNode = document.getElementById('skills-container');
-    const certificatesNode = document.getElementById('certificates-container');
-    const workNode = document.getElementById('projects-container');
-    const tasks = [];
-    if (skillsNode) tasks.push(getJson('/api/skills').then(items => renderSkillCards(skillsNode, items)));
-    if (certificatesNode) tasks.push(getJson('/api/certificates').then(items => renderGallery(certificatesNode, items, 'certificate')));
-    if (workNode) tasks.push(getJson('/api/projects').then(items => renderGallery(workNode, items, 'work')));
-    await Promise.all(tasks);
-  }
-
   function setResumeLink(resume) {
     document.querySelectorAll('.resume-download').forEach(link => {
       if (!resume || !(resume.downloadUrl || resume.url)) {
@@ -218,8 +206,7 @@
     });
     const educationTask = getJson('/api/education').then(renderEducation);
     const resumeTask = getJson('/api/resume').then(setResumeLink);
-    const sectionsTask = renderAboutPage();
-    const results = await Promise.allSettled([profileTask, educationTask, resumeTask, sectionsTask]);
+    const results = await Promise.allSettled([profileTask, educationTask, resumeTask]);
     results.filter(result => result.status === 'rejected').forEach(result => console.error('Portfolio content could not be loaded:', result.reason));
     if (window.AOS) window.AOS.refresh();
   }
