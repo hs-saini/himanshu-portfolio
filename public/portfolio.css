@@ -1,18 +1,29 @@
 html{scroll-behavior:smooth;scroll-padding-top:84px}
 body{overflow-x:hidden}
-.navbar{position:sticky;top:0;z-index:1030;background:rgba(13,19,31,.92)!important;backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.09);box-shadow:0 8px 30px rgba(0,0,0,.16)}
+.navbar{position:sticky;top:0;z-index:1030;background:radial-gradient(ellipse at 15% 0%,rgba(128,240,193,.12),transparent 55%),radial-gradient(ellipse at 82% 100%,rgba(105,155,255,.11),transparent 45%),rgba(13,19,31,.92)!important;backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.09);box-shadow:0 8px 30px rgba(0,0,0,.16)}
 .navbar-brand{display:flex;align-items:center;letter-spacing:.01em}
 .navbar-brand img{border:2px solid rgba(128,240,193,.8);box-shadow:0 0 18px rgba(128,240,193,.2)}
-.navbar .nav-link{position:relative;margin-inline:3px;transition:color .2s ease}
-.navbar .nav-link:hover,.navbar .nav-link:focus{color:#80f0c1!important}
+.navbar .nav-link{position:relative;margin-inline:3px;transition:color .2s ease,transform .25s ease,text-shadow .25s ease}
+.navbar .nav-link:hover,.navbar .nav-link:focus{color:#80f0c1!important;transform:translateX(3px);text-shadow:0 0 18px rgba(128,240,193,.45)}
 .navbar .nav-link:after{position:absolute;content:"";left:.5rem;right:.5rem;bottom:3px;height:2px;background:#80f0c1;transform:scaleX(0);transform-origin:left;transition:transform .2s ease}
 .navbar .nav-link:hover:after,.navbar .nav-link:focus:after{transform:scaleX(1)}
-.hero{position:relative;isolation:isolate;overflow:hidden;background-image:radial-gradient(ellipse at 18% 18%,rgba(128,240,193,.25),transparent 40%),linear-gradient(135deg,#0e1b31,#252056 58%,#116354)!important}
+.navbar-collapse.show .navbar-nav{animation:menu-unfold .35s ease both}
+.navbar-collapse.show .nav-item{animation:menu-item-slide .38s cubic-bezier(.2,.8,.2,1) both}
+.navbar-collapse.show .nav-item:nth-child(2){animation-delay:.04s}
+.navbar-collapse.show .nav-item:nth-child(3){animation-delay:.08s}
+.navbar-collapse.show .nav-item:nth-child(4){animation-delay:.12s}
+.navbar-collapse.show .nav-item:nth-child(5){animation-delay:.16s}
+.navbar-collapse.show .nav-item:nth-child(6){animation-delay:.2s}
+.navbar-collapse.show .nav-item:nth-child(7){animation-delay:.24s}
+.hero{position:relative;isolation:isolate;overflow:hidden;background-image:radial-gradient(ellipse at 52% 82%,rgba(105,165,255,.25),transparent 43%),radial-gradient(ellipse at 18% 18%,rgba(128,240,193,.25),transparent 40%),linear-gradient(135deg,#0e1b31,#252056 58%,#116354)!important}
+.hero:before{position:absolute;z-index:-1;inset:0;content:"";background:radial-gradient(ellipse at 52% 82%,rgba(130,183,255,.19),transparent 42%),linear-gradient(110deg,transparent 30%,rgba(255,255,255,.11) 48%,transparent 66%);transform:translateX(-120%);animation:hero-light-sweep 9s ease-in-out infinite;pointer-events:none}
+.hero .btn{box-shadow:0 10px 30px rgba(75,135,255,.2);transition:transform .25s ease,box-shadow .25s ease,filter .25s ease}
+.hero .btn:hover,.hero .btn:focus-visible{transform:translateY(-3px);box-shadow:0 0 34px rgba(113,170,255,.42),0 14px 30px rgba(4,9,18,.22);filter:brightness(1.08)}
 .hero:after{content:"";position:absolute;z-index:-1;width:340px;height:340px;border:1px solid rgba(255,255,255,.12);border-radius:50%;right:-90px;bottom:-190px;box-shadow:0 0 0 35px rgba(255,255,255,.025),0 0 0 70px rgba(255,255,255,.02)}
 .hero h1{letter-spacing:-.04em}
 .section h2{letter-spacing:-.035em}
 .card,.contact-info{border:1px solid rgba(128,240,193,.11);border-radius:16px;overflow:hidden;transition:transform .28s ease,box-shadow .28s ease}
-.card:hover{transform:translateY(-7px);box-shadow:0 18px 44px rgba(0,0,0,.2)}
+.card:hover{transform:translateY(-7px);box-shadow:0 18px 44px rgba(0,0,0,.2),0 0 30px rgba(105,165,255,.12)}
 .footer{position:relative;overflow:hidden;background:linear-gradient(135deg,#0b1220,#111d31 65%,#123a35)!important;border-top:1px solid rgba(128,240,193,.2);padding:54px 0 30px!important}
 .footer h5{font-family:'Segoe UI',sans-serif;font-size:1.3rem;letter-spacing:.03em}
 .footer p{margin:22px 0 0;color:#b7c4d7}
@@ -91,8 +102,9 @@ body{overflow-x:hidden}
 @media(max-width:768px){.portfolio-slider>.portfolio-slide{flex-basis:84vw;max-width:84vw}.education-card{align-items:flex-start;gap:15px;padding:16px}.education-image{width:72px;height:72px;flex-basis:72px}.section-heading{align-items:center}.intro-orbit{width:90vw}}
 @media(max-width:480px){.section-heading h2{font-size:1.55rem}.slider-controls button{width:36px;height:36px}.hero .resume-download{margin:10px 0 0}.education-card{gap:12px}.education-image{width:58px;height:58px;flex-basis:58px}.skill-card{padding:14px}.portfolio-intro h1{font-size:clamp(4rem,17vw,6rem)}}
 @media(prefers-reduced-motion:reduce){.intro-content,.intro-orbit,.skill-fill,.education-card,.certificate-lightbox{animation:none!important}.portfolio-intro,.intro-enter,.intro-enter span,.portfolio-slide,.skill-card,.certificate-img,.work-card .project-img{transition:none!important}.portfolio-slider{scroll-behavior:auto}}
-.contact-section{position:relative;overflow:hidden;background:radial-gradient(ellipse at 8% 80%,rgba(128,240,193,.12),transparent 38%),linear-gradient(145deg,#0d1725,#111c2c 65%,#102a2b);color:#edf6f2}
-.contact-card{height:100%;padding:clamp(22px,4vw,38px);border:1px solid rgba(128,240,193,.16);border-radius:20px;background:linear-gradient(145deg,rgba(23,38,53,.92),rgba(12,23,35,.96));box-shadow:0 20px 60px rgba(0,0,0,.16);animation:contact-arrive .7s both}
+.contact-section{position:relative;overflow:hidden;background:radial-gradient(ellipse at 8% 80%,rgba(128,240,193,.12),transparent 38%),radial-gradient(ellipse at 88% 15%,rgba(105,165,255,.14),transparent 36%),linear-gradient(145deg,#0d1725,#111c2c 65%,#102a2b);color:#edf6f2}
+.contact-card{height:100%;padding:clamp(22px,4vw,38px);border:1px solid rgba(128,240,193,.16);border-radius:20px;background:linear-gradient(145deg,rgba(23,38,53,.92),rgba(12,23,35,.96));box-shadow:0 20px 60px rgba(0,0,0,.16);animation:contact-arrive .7s both;transition:border-color .25s ease,box-shadow .25s ease}
+.contact-card:hover{border-color:rgba(132,180,255,.3);box-shadow:0 24px 65px rgba(0,0,0,.22),0 0 32px rgba(105,165,255,.1)}
 .contact-intro{display:flex;flex-direction:column;align-items:flex-start}
 .contact-card h3{margin:0 0 12px;font-size:1.5rem;letter-spacing:-.03em}
 .contact-intro>p:not(.contact-detail){margin:0 0 26px;color:#bdcbd1;line-height:1.7}
@@ -109,4 +121,8 @@ body{overflow-x:hidden}
 .form-message{min-height:1.5em;margin-top:14px;font-weight:600}
 .form-message:empty{display:none}
 @keyframes contact-arrive{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:translateY(0)}}
-@media(prefers-reduced-motion:reduce){.contact-card{animation:none!important}.contact-submit{transition:none!important}}
+@keyframes menu-unfold{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
+@keyframes menu-item-slide{from{opacity:0;transform:translateX(14px)}to{opacity:1;transform:translateX(0)}}
+@keyframes hero-light-sweep{0%,20%{transform:translateX(-120%)}55%,100%{transform:translateX(120%)}}
+@media(prefers-reduced-motion:reduce){.contact-card{animation:none!important;transition:none!important}.contact-submit,.hero .btn{transition:none!important;transform:none!important}}
+@media(prefers-reduced-motion:reduce){.hero:before,.navbar-collapse.show .navbar-nav,.navbar-collapse.show .nav-item{animation:none!important}.navbar .nav-link{transform:none!important;text-shadow:none!important}}
