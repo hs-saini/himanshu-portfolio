@@ -91,3 +91,22 @@ body{overflow-x:hidden}
 @media(max-width:768px){.portfolio-slider>.portfolio-slide{flex-basis:84vw;max-width:84vw}.education-card{align-items:flex-start;gap:15px;padding:16px}.education-image{width:72px;height:72px;flex-basis:72px}.section-heading{align-items:center}.intro-orbit{width:90vw}}
 @media(max-width:480px){.section-heading h2{font-size:1.55rem}.slider-controls button{width:36px;height:36px}.hero .resume-download{margin:10px 0 0}.education-card{gap:12px}.education-image{width:58px;height:58px;flex-basis:58px}.skill-card{padding:14px}.portfolio-intro h1{font-size:clamp(4rem,17vw,6rem)}}
 @media(prefers-reduced-motion:reduce){.intro-content,.intro-orbit,.skill-fill,.education-card,.certificate-lightbox{animation:none!important}.portfolio-intro,.intro-enter,.intro-enter span,.portfolio-slide,.skill-card,.certificate-img,.work-card .project-img{transition:none!important}.portfolio-slider{scroll-behavior:auto}}
+.contact-section{position:relative;overflow:hidden;background:radial-gradient(ellipse at 8% 80%,rgba(128,240,193,.12),transparent 38%),linear-gradient(145deg,#0d1725,#111c2c 65%,#102a2b);color:#edf6f2}
+.contact-card{height:100%;padding:clamp(22px,4vw,38px);border:1px solid rgba(128,240,193,.16);border-radius:20px;background:linear-gradient(145deg,rgba(23,38,53,.92),rgba(12,23,35,.96));box-shadow:0 20px 60px rgba(0,0,0,.16);animation:contact-arrive .7s both}
+.contact-intro{display:flex;flex-direction:column;align-items:flex-start}
+.contact-card h3{margin:0 0 12px;font-size:1.5rem;letter-spacing:-.03em}
+.contact-intro>p:not(.contact-detail){margin:0 0 26px;color:#bdcbd1;line-height:1.7}
+.contact-detail{display:flex;align-items:center;gap:12px;margin:9px 0;color:#e3f0eb;text-decoration:none;overflow-wrap:anywhere}
+.contact-detail i{display:grid;place-items:center;width:38px;height:38px;flex:0 0 38px;border:1px solid rgba(128,240,193,.2);border-radius:12px;background:rgba(128,240,193,.08);color:#85edc6}
+.contact-detail[href]:hover{color:#85edc6}
+.contact-form .form-label{color:#dce8e3;font-weight:600}
+.contact-form .form-control{min-height:48px;border:1px solid rgba(255,255,255,.13);border-radius:11px;background:rgba(5,12,20,.42);color:#f2f8f5}
+.contact-form textarea.form-control{min-height:140px;resize:vertical}
+.contact-form .form-control::placeholder{color:#8999a0}
+.contact-form .form-control:focus{border-color:#80f0c1;box-shadow:0 0 0 .2rem rgba(128,240,193,.15)}
+.contact-submit{display:inline-flex;align-items:center;gap:22px;padding:12px 18px;border:0;border-radius:999px;background:linear-gradient(100deg,#80f0c1,#8cbbff);color:#0b1920;font-weight:700;transition:transform .2s ease,box-shadow .2s ease}
+.contact-submit:hover,.contact-submit:focus-visible{transform:translateY(-2px);box-shadow:0 12px 28px rgba(128,240,193,.2);background:linear-gradient(100deg,#a2f7d3,#b0ceff);color:#0b1920}
+.form-message{min-height:1.5em;margin-top:14px;font-weight:600}
+.form-message:empty{display:none}
+@keyframes contact-arrive{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:translateY(0)}}
+@media(prefers-reduced-motion:reduce){.contact-card{animation:none!important}.contact-submit{transition:none!important}}

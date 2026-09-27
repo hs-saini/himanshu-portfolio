@@ -63,9 +63,9 @@ const defaults = {
   ],
   education: [],
   profile: {
-    headline: 'Web Designer & Developer',
-    summary: 'I am a passionate web designer and developer with expertise in creating beautiful, responsive websites. I love bringing ideas to life through code and design.',
-    story: 'With years of experience in HTML, CSS, JavaScript, and various frameworks, I create stunning digital experiences that engage users and drive results.'
+    headline: 'Computer Science & Engineering Student · AKTU',
+    summary: 'I am a Computer Science Engineering student under Dr. A.P.J. Abdul Kalam Technical University (AKTU) with a passion for web design and development. Proficient in Python, JavaScript, and modern web technologies, I focus on turning complex ideas into functional, visually compelling web experiences. Driven by continuous learning, I am constantly improving my core programming skills and seeking impactful developer roles to build robust digital solutions.',
+    story: 'As a Computer Science and Engineering student at AKTU, I thrive at the intersection of logical problem-solving and creative design — equally comfortable crafting backend logic in Python as I am designing responsive user interfaces with JavaScript. My passion lies in full-stack web development and UI/UX design, turning complex ideas into efficient, visually compelling web experiences. Driven by continuous learning, I am constantly refining my technical stack and mastering modern developer tools. I am actively seeking opportunities in software engineering and web development where clean code, intuitive design, and structured thinking can drive real-world impact.'
   },
   resume: null,
   certificates: [
@@ -82,13 +82,26 @@ const defaults = {
   contactMessages: []
 };
 
+const legacyProfile = {
+  headline: 'Web Designer & Developer',
+  summary: 'I am a passionate web designer and developer with expertise in creating beautiful, responsive websites. I love bringing ideas to life through code and design.',
+  story: 'With years of experience in HTML, CSS, JavaScript, and various frameworks, I create stunning digital experiences that engage users and drive results.'
+};
+function normalizeProfile(profile) {
+  if (!profile || typeof profile !== 'object') return { ...defaults.profile };
+  const isLegacyDefault = profile.headline === legacyProfile.headline &&
+    profile.summary === legacyProfile.summary &&
+    profile.story === legacyProfile.story;
+  return isLegacyDefault ? { ...defaults.profile } : profile;
+}
+
 function readData() {
   try {
     const data = JSON.parse(fs.readFileSync(DATA_FILE, 'utf8'));
     return {
       skills: Array.isArray(data.skills) ? data.skills : [],
       education: Array.isArray(data.education) ? data.education : [],
-      profile: data.profile && typeof data.profile === 'object' ? data.profile : { ...defaults.profile },
+      profile: normalizeProfile(data.profile),
       resume: data.resume && typeof data.resume === 'object' ? data.resume : null,
       certificates: Array.isArray(data.certificates) ? data.certificates : [],
       projects: Array.isArray(data.projects) ? data.projects : defaults.projects,
@@ -106,7 +119,7 @@ function normalizeData(value) {
   return {
     skills: Array.isArray(saved?.skills) ? saved.skills : [],
     education: Array.isArray(saved?.education) ? saved.education : [],
-    profile: saved?.profile && typeof saved.profile === 'object' ? saved.profile : { ...defaults.profile },
+    profile: normalizeProfile(saved?.profile),
     resume: saved?.resume && typeof saved.resume === 'object' ? saved.resume : null,
     certificates: Array.isArray(saved?.certificates) ? saved.certificates : [],
     projects: Array.isArray(saved?.projects) ? saved.projects : defaults.projects,

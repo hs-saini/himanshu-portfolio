@@ -139,13 +139,9 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="index.html#about">About</a></li>
-                    <li class="nav-item"><a class="nav-link" href="index.html#skills">Skills</a></li>
-                    <li class="nav-item"><a class="nav-link" href="index.html#projects">Projects</a></li>
-                    <li class="nav-item"><a class="nav-link" href="index.html#contact">Contact</a></li>
-                    <li class="nav-item"><a class="nav-link" href="about.html">About Page</a></li>
-                    <li class="nav-item"><a class="nav-link" href="privacy.html">Privacy</a></li>
-                    <li class="nav-item"><a class="nav-link" href="terms.html">Terms</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="https://www.instagram.com/sainii._.himanshu?igsh=NWhueXQzZGNqcGIy" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+                    <li class="nav-item"><a class="nav-link" href="https://www.linkedin.com/in/himanshu-saini-b1676b390" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
                 </ul>
             </div>
         </div>
@@ -176,41 +172,43 @@
         </div>
     </section>
 
-    <section class="section">
+    <section class="section contact-section">
         <div class="container">
-            <div class="row">
-                <div class="col-md-6" data-aos="fade-right">
-                    <div class="contact-info">
-                        <h3>Get In Touch</h3>
-                        <p><i class="fas fa-envelope"></i> sainihimanshu27958@gmail.com</p>
-                        <p><i class="fas fa-map-marker-alt"></i> Uttar Pradesh, India</p>
-                        <p><i class="fas fa-phone"></i> +91 7906156268</p>
+            <div class="row g-4 align-items-stretch">
+                <div class="col-lg-4" data-aos="fade-right">
+                    <div class="contact-card contact-intro">
+                        <h3>Get in touch</h3>
+                        <p>Have a question, an idea, or an opportunity? Send a message and I'll get back to you.</p>
+                        <a class="contact-detail" href="mailto:sainihimanshu27958@gmail.com"><i class="fas fa-envelope" aria-hidden="true"></i><span>sainihimanshu27958@gmail.com</span></a>
+                        <p class="contact-detail"><i class="fas fa-map-marker-alt" aria-hidden="true"></i><span>Uttar Pradesh, India</span></p>
+                        <a class="contact-detail" href="tel:+917906156268"><i class="fas fa-phone" aria-hidden="true"></i><span>+91 7906156268</span></a>
                         <h4>Follow Me</h4>
                         <div class="social-icons">
-                            <a href="https://www.instagram.com/sainii._.himanshu?igsh=NWhueXQzZGNqcGIy"><i class="fab fa-instagram"></i></a>
+                            <a href="https://www.instagram.com/sainii._.himanshu?igsh=NWhueXQzZGNqcGIy" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
                             <a href="https://x.com/Himansh75026447"><i class="fab fa-twitter"></i></a>
-                            <a href="https://www.linkedin.com/in/himanshu-saini-b1676b390"><i class="fab fa-linkedin"></i></a>
+                            <a href="https://www.linkedin.com/in/himanshu-saini-b1676b390" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
                             <a href="https://www.youtube.com/@Desibalakgammaale-top"><i class="fab fa-youtube"></i></a>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6" data-aos="fade-left">
-                    <form id="contact-form" action="/contact" method="POST">
+                <div class="col-lg-8" data-aos="fade-left">
+                    <form class="contact-card contact-form" id="contact-form" action="/contact" method="POST">
+                        <h3>Send a message</h3>
                         <div class="mb-3">
                             <label for="name" class="form-label">Full Name</label>
-                            <input type="text" name="name" class="form-control" id="name" required>
+                            <input type="text" name="name" class="form-control" id="name" autocomplete="name" required>
                         </div>
                         <div class="mb-3">
                             <label for="email" class="form-label">Email</label>
-                            <input type="email" name="email" class="form-control" id="email" required>
+                            <input type="email" name="email" class="form-control" id="email" autocomplete="email" required>
                         </div>
                         <div class="mb-3">
                             <label for="message" class="form-label">Project Details</label>
                             <textarea name="message" class="form-control" id="message" rows="5" required></textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary contact-submit">Send message <span aria-hidden="true">↗</span></button>
+                        <div id="form-message" class="form-message" role="status" aria-live="polite"></div>
                     </form>
-                    <div id="form-message" class="mt-3 text-center"></div>
                 </div>
             </div>
         </div>
@@ -220,9 +218,9 @@
         <div class="container text-center">
             <h5>Himanshu Saini</h5>
             <div class="social-icons">
-                <a href="https://www.instagram.com/sainii._.himanshu?igsh=NWhueXQzZGNqcGIy"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.instagram.com/sainii._.himanshu?igsh=NWhueXQzZGNqcGIy" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
                 <a href="https://x.com/Himansh75026447"><i class="fab fa-twitter"></i></a>
-                <a href="https://www.linkedin.com/in/himanshu-saini-b1676b390"><i class="fab fa-linkedin"></i></a>
+                <a href="https://www.linkedin.com/in/himanshu-saini-b1676b390" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
                 <a href="https://www.youtube.com/@Desibalakgammaale-top"><i class="fab fa-youtube"></i></a>
             </div>
             <p>&copy; <span class="current-year"></span> Himanshu Saini Portfolio. <a href="privacy.html">Privacy</a> | <a href="terms.html">Terms</a></p>
@@ -259,13 +257,13 @@
             })
             .then(async response => {
                 const result = await response.json();
-                if (!response.ok) throw new Error(result.message || 'Form submission failed');
-                document.getElementById('form-message').textContent = 'Thank you! Your message has been sent.';
+                if (!response.ok || result.success !== true) throw new Error(result.message || 'Form submission failed');
+                document.getElementById('form-message').textContent = result.message || 'Thank you! Your message has been sent.';
                 document.getElementById('form-message').style.color = 'green';
                 this.reset();
             })
-            .catch(() => {
-                document.getElementById('form-message').textContent = 'Oops! There was a problem sending your message.';
+            .catch(error => {
+                document.getElementById('form-message').textContent = error.message || 'Oops! There was a problem sending your message.';
                 document.getElementById('form-message').style.color = 'red';
             });
         });

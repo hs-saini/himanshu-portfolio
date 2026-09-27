@@ -15,8 +15,8 @@ Open `http://localhost:3000`. The admin studio is at `http://localhost:3000/admi
 
 The frontend files are in `public/`, as required for Vercel's static asset CDN. Express serves the API, login, and `/admin` redirect. Content, education details, About-page copy, and resume metadata are stored in Upstash Redis. Uploaded images and the downloadable resume are stored in Vercel Blob, so edits persist across serverless instances.
 
-1. Push this project to a GitHub repository. Keep the repository private unless you explicitly want the source code public.
-2. Import the repository into Vercel and set the Vercel project name to `hsaini`. A Vercel-generated `*.vercel.app` alias is assigned automatically; a preferred alias can only be added if it is available.
+1. Import the existing private repository, `hs-saini/himanshu-portfolio`, into the Vercel project.
+2. Keep the project name `hsaini`. Add `hsainii.vercel.app` under Project Settings → Domains if the alias is available; otherwise keep the deployment's generated `*.vercel.app` URL.
 3. Connect an Upstash Redis store and Vercel Blob store to the Vercel project. Their environment variables must be available to the deployment:
    - `KV_REST_API_URL` and `KV_REST_API_TOKEN` (or the equivalent `UPSTASH_REDIS_REST_URL` and `UPSTASH_REDIS_REST_TOKEN`)
    - `BLOB_READ_WRITE_TOKEN`
