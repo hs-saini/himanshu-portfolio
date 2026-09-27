@@ -384,9 +384,10 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#education">Education</a></li>
                     <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
                     <li class="nav-item"><a class="nav-link" href="#certificates">Certificates</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#projects">Work</a></li>
                     <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
                     <li class="nav-item"><a class="nav-link" href="about.html">About Page</a></li>
                     <li class="nav-item"><a class="nav-link" href="contact.html">Contact Page</a></li>
@@ -397,6 +398,18 @@
             </div>
         </div>
     </nav>
+
+    <section class="portfolio-intro" id="portfolioIntro" role="dialog" aria-modal="true" aria-labelledby="introTitle">
+        <div class="intro-orbit intro-orbit-one"></div>
+        <div class="intro-orbit intro-orbit-two"></div>
+        <div class="intro-content">
+            <p class="intro-kicker">PORTFOLIO · 2026</p>
+            <h1 id="introTitle">Himanshu<br><span>Saini.</span></h1>
+            <p class="intro-role">Designing thoughtful digital experiences.</p>
+            <button class="intro-enter" id="enterPortfolio" type="button">Enter portfolio <span aria-hidden="true">↗</span></button>
+            <span class="intro-hint">A little space to explore</span>
+        </div>
+    </section>
 
     <!-- Theme Modal -->
     <div class="modal fade" id="themeModal" tabindex="-1" aria-labelledby="themeModalLabel" aria-hidden="true">
@@ -417,9 +430,10 @@
     <section class="hero">
         <div class="container">
             <h1 data-aos="fade-up">Hi, I'm Himanshu Saini</h1>
-            <p data-aos="fade-up" data-aos-delay="200">Web Designer & Developer</p>
+            <p data-aos="fade-up" data-aos-delay="200" data-profile-headline>Web Designer &amp; Developer</p>
             <a href="#contact" class="btn btn-custom btn-lg">Hire Me</a>
             <a href="#projects" class="btn btn-outline-light btn-lg ms-3">View Work</a>
+            <a class="btn btn-custom btn-lg resume-download" href="#" hidden><i class="fas fa-download" aria-hidden="true"></i> Download CV</a>
         </div>
     </section>
 
@@ -431,10 +445,18 @@
                 </div>
                 <div class="col-md-6" data-aos="fade-left">
                     <h2>About Me</h2>
-                    <p>I am a passionate web designer and developer with expertise in creating beautiful, responsive websites. I love bringing ideas to life through code and design.</p>
-                    <p>With years of experience in HTML, CSS, JavaScript, and various frameworks, I create stunning digital experiences that engage users and drive results.</p>
+                    <p data-profile-summary>I am a passionate web designer and developer with expertise in creating beautiful, responsive websites. I love bringing ideas to life through code and design.</p>
+                    <p data-profile-story>With years of experience in HTML, CSS, JavaScript, and various frameworks, I create stunning digital experiences that engage users and drive results.</p>
+                    <a href="about.html" class="btn btn-outline-light">More about me <span aria-hidden="true">↗</span></a>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <section id="education" class="section education-section">
+        <div class="container">
+            <div class="section-heading"><div><p class="section-eyebrow">THE JOURNEY</p><h2 data-aos="fade-up">Education</h2></div></div>
+            <div class="education-list" id="education-container" aria-live="polite"></div>
         </div>
     </section>
 
@@ -447,8 +469,8 @@
 
     <section id="certificates" class="section bg-light">
         <div class="container">
-            <h2 class="text-center mb-5" data-aos="fade-up">Certificates</h2>
-            <div class="row" id="certificates-container">
+            <div class="section-heading"><div><p class="section-eyebrow">LEARNING IN ACTION</p><h2 data-aos="fade-up">Certificates</h2></div><div class="slider-controls"><button type="button" data-slide="certificates-container" data-direction="-1" onclick="scrollPortfolioSlider(this)" aria-label="Previous certificates">←</button><button type="button" data-slide="certificates-container" data-direction="1" onclick="scrollPortfolioSlider(this)" aria-label="Next certificates">→</button></div></div>
+            <div class="row portfolio-slider" id="certificates-container">
                 <!-- Certificates will be loaded dynamically -->
             </div>
         </div>
@@ -456,8 +478,8 @@
 
     <section id="projects" class="section">
         <div class="container">
-            <h2 class="text-center mb-5" data-aos="fade-up">Projects</h2>
-            <div class="row" id="projects-container"></div>
+            <div class="section-heading"><div><p class="section-eyebrow">SELECTED PROJECTS</p><h2 data-aos="fade-up">Work</h2></div><div class="slider-controls"><button type="button" data-slide="projects-container" data-direction="-1" onclick="scrollPortfolioSlider(this)" aria-label="Previous work">←</button><button type="button" data-slide="projects-container" data-direction="1" onclick="scrollPortfolioSlider(this)" aria-label="Next work">→</button></div></div>
+            <div class="row portfolio-slider" id="projects-container"></div>
         </div>
     </section>
 
@@ -524,11 +546,18 @@
         </div>
     </div>
 
+    <div class="certificate-lightbox" id="certificateLightbox" role="dialog" aria-modal="true" aria-label="Certificate preview" hidden>
+        <button type="button" class="lightbox-close" aria-label="Close certificate preview">×</button>
+        <img src="" alt="" id="lightboxImage">
+        <p id="lightboxCaption"></p>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="portfolio.js"></script>
+    <script src="portfolio-content.js"></script>
     <script>
-        AOS.init();
+        if (window.AOS) AOS.init();
 
         function setTheme(theme) {
             if (theme === 'dark') {
@@ -557,7 +586,7 @@
                     return;
                 }
                 e.preventDefault();
-                target.scrollIntoView({ behavior: 'smooth' });
+                target.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
             });
         });
 
@@ -750,32 +779,50 @@
                     return;
                 }
 
-                const leftCol = document.createElement('div');
-                leftCol.className = 'col-md-6';
-                leftCol.setAttribute('data-aos', 'fade-up');
-
-                const rightCol = document.createElement('div');
-                rightCol.className = 'col-md-6';
-                rightCol.setAttribute('data-aos', 'fade-up');
-
                 skills.forEach((skill, index) => {
-                    const skillDiv = document.createElement('div');
-                    const heading = document.createElement('h4');
+                    const column = document.createElement('div');
+                    column.className = 'col-md-6 mb-3';
+                    column.setAttribute('data-aos', 'fade-up');
+                    column.setAttribute('data-aos-delay', String((index % 4) * 90));
+                    const card = document.createElement('article');
+                    card.className = 'skill-card';
+                    if (skill.imageUrl) {
+                        const image = document.createElement('img');
+                        image.src = skill.imageUrl;
+                        image.alt = '';
+                        image.className = 'skill-image';
+                        image.loading = 'lazy';
+                        card.appendChild(image);
+                    } else {
+                        const mark = document.createElement('span');
+                        mark.className = 'skill-mark';
+                        mark.setAttribute('aria-hidden', 'true');
+                        mark.textContent = String(skill.name || 'S').slice(0, 1).toUpperCase();
+                        card.appendChild(mark);
+                    }
+                    const details = document.createElement('div');
+                    details.className = 'skill-details';
+                    const heading = document.createElement('h3');
                     heading.textContent = skill.name || 'Skill';
+                    const percentage = Math.max(0, Math.min(100, Number(skill.percentage) || 0));
+                    const label = document.createElement('span');
+                    label.className = 'skill-percentage';
+                    label.textContent = `${percentage}%`;
                     const bar = document.createElement('div');
                     bar.className = 'skill-bar';
+                    bar.setAttribute('role', 'progressbar');
+                    bar.setAttribute('aria-valuemin', '0');
+                    bar.setAttribute('aria-valuemax', '100');
+                    bar.setAttribute('aria-valuenow', String(percentage));
                     const fill = document.createElement('div');
                     fill.className = 'skill-fill';
-                    fill.style.width = `${Math.max(0, Math.min(100, Number(skill.percentage) || 0))}%`;
+                    fill.style.width = `${percentage}%`;
                     bar.appendChild(fill);
-                    skillDiv.append(heading, bar);
-
-                    if (index % 2 === 0) leftCol.appendChild(skillDiv);
-                    else rightCol.appendChild(skillDiv);
+                    details.append(heading, label, bar);
+                    card.appendChild(details);
+                    column.appendChild(card);
+                    container.appendChild(column);
                 });
-
-                container.appendChild(leftCol);
-                container.appendChild(rightCol);
                 if (window.AOS) AOS.refresh();
             } catch (error) {
                 container.innerHTML = '<div class="col-12 text-center"><p>Unable to load skills.</p></div>';
@@ -799,20 +846,25 @@
 
                 certificates.forEach(cert => {
                     const certDiv = document.createElement('div');
-                    certDiv.className = 'col-md-4 mb-4';
+                    certDiv.className = 'col-md-4 mb-4 portfolio-slide certificate-slide';
                     certDiv.setAttribute('data-aos', 'fade-up');
                     const card = document.createElement('div');
                     card.className = 'card certificate-card';
-                    const body = document.createElement('div');
-                    body.className = 'card-body text-center';
                     if (cert.imageUrl) {
+                        const preview = document.createElement('button');
+                        preview.type = 'button';
+                        preview.className = 'certificate-preview';
+                        preview.setAttribute('aria-label', `View certificate: ${cert.title || 'Certificate'}`);
                         const image = document.createElement('img');
                         image.src = cert.imageUrl;
                         image.alt = cert.title || 'Certificate';
-                        image.className = 'certificate-img mb-3';
-                        image.style.cssText = 'width:60px;height:60px;object-fit:cover;border-radius:50%';
-                        body.appendChild(image);
+                        image.className = 'certificate-img';
+                        image.loading = 'lazy';
+                        preview.appendChild(image);
+                        card.appendChild(preview);
                     }
+                    const body = document.createElement('div');
+                    body.className = 'card-body';
                     const title = document.createElement('h5');
                     title.className = 'card-title';
                     title.textContent = cert.title || 'Certificate';
@@ -845,16 +897,17 @@
                 }
                 projects.forEach((project, index) => {
                     const column = document.createElement('div');
-                    column.className = 'col-md-4 mb-4';
+                    column.className = 'col-md-4 mb-4 portfolio-slide work-slide';
                     column.setAttribute('data-aos', 'fade-up');
                     column.setAttribute('data-aos-delay', String((index % 3) * 120));
                     const card = document.createElement('div');
-                    card.className = 'card h-100';
+                    card.className = 'card h-100 work-card';
                     if (project.imageUrl) {
                         const image = document.createElement('img');
                         image.src = project.imageUrl;
                         image.alt = project.title || 'Portfolio project';
                         image.className = 'card-img-top project-img';
+                        image.loading = 'lazy';
                         card.appendChild(image);
                     }
                     const body = document.createElement('div');

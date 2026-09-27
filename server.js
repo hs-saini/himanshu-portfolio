@@ -54,13 +54,20 @@ if (IS_VERCEL && !process.env.BLOB_READ_WRITE_TOKEN) {
 
 const defaults = {
   skills: [
-    { id: 'skill-html', name: 'HTML5', percentage: 95 },
-    { id: 'skill-css', name: 'CSS3', percentage: 90 },
-    { id: 'skill-js', name: 'JavaScript', percentage: 88 },
-    { id: 'skill-bootstrap', name: 'Bootstrap', percentage: 85 },
-    { id: 'skill-react', name: 'React', percentage: 80 },
-    { id: 'skill-design', name: 'UI/UX Design', percentage: 75 }
+    { id: 'skill-html', name: 'HTML5', percentage: 95, imageUrl: '' },
+    { id: 'skill-css', name: 'CSS3', percentage: 90, imageUrl: '' },
+    { id: 'skill-js', name: 'JavaScript', percentage: 88, imageUrl: '' },
+    { id: 'skill-bootstrap', name: 'Bootstrap', percentage: 85, imageUrl: '' },
+    { id: 'skill-react', name: 'React', percentage: 80, imageUrl: '' },
+    { id: 'skill-design', name: 'UI/UX Design', percentage: 75, imageUrl: '' }
   ],
+  education: [],
+  profile: {
+    headline: 'Web Designer & Developer',
+    summary: 'I am a passionate web designer and developer with expertise in creating beautiful, responsive websites. I love bringing ideas to life through code and design.',
+    story: 'With years of experience in HTML, CSS, JavaScript, and various frameworks, I create stunning digital experiences that engage users and drive results.'
+  },
+  resume: null,
   certificates: [
     { id: 'cert-web', title: 'Web Development', description: 'Responsive website design and frontend development.', imageUrl: '' },
     { id: 'cert-design', title: 'UI/UX Design', description: 'Modern user interface and user experience principles.', imageUrl: '' },
@@ -80,6 +87,9 @@ function readData() {
     const data = JSON.parse(fs.readFileSync(DATA_FILE, 'utf8'));
     return {
       skills: Array.isArray(data.skills) ? data.skills : [],
+      education: Array.isArray(data.education) ? data.education : [],
+      profile: data.profile && typeof data.profile === 'object' ? data.profile : { ...defaults.profile },
+      resume: data.resume && typeof data.resume === 'object' ? data.resume : null,
       certificates: Array.isArray(data.certificates) ? data.certificates : [],
       projects: Array.isArray(data.projects) ? data.projects : defaults.projects,
       chatMessages: Array.isArray(data.chatMessages) ? data.chatMessages : [],
@@ -95,6 +105,9 @@ function normalizeData(value) {
   const saved = typeof value === 'string' ? JSON.parse(value) : value;
   return {
     skills: Array.isArray(saved?.skills) ? saved.skills : [],
+    education: Array.isArray(saved?.education) ? saved.education : [],
+    profile: saved?.profile && typeof saved.profile === 'object' ? saved.profile : { ...defaults.profile },
+    resume: saved?.resume && typeof saved.resume === 'object' ? saved.resume : null,
     certificates: Array.isArray(saved?.certificates) ? saved.certificates : [],
     projects: Array.isArray(saved?.projects) ? saved.projects : defaults.projects,
     chatMessages: Array.isArray(saved?.chatMessages) ? saved.chatMessages : defaults.chatMessages,
@@ -185,6 +198,28 @@ const upload = multer({
     callback(null, true);
   }
 });
+const resumeUpload = multer({
+  storage: IS_VERCEL
+    ? multer.memoryStorage()
+    : multer.diskStorage({
+        destination: UPLOAD_DIR,
+        filename: (req, file, callback) => {
+          const extension = path.extname(file.originalname).toLowerCase();
+          callback(null, `${Date.now()}-${crypto.randomBytes(6).toString('hex')}${extension}`);
+        }
+      }),
+  limits: { fileSize: 10 * 1024 * 1024 },
+  fileFilter: (req, file, callback) => {
+    const extension = path.extname(file.originalname).toLowerCase();
+    const validPdf = extension === '.pdf' && file.mimetype === 'application/pdf';
+    const validDocx = extension === '.docx' &&
+      file.mimetype === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
+    if (!validPdf && !validDocx) {
+      return callback(new Error('Upload a PDF or DOCX resume.'));
+    }
+    callback(null, true);
+  }
+});
 
 function getToken(req) {
   const match = (req.get('authorization') || '').match(/^Bearer\s+(.+)$/i);
@@ -251,10 +286,19 @@ function handleUpload(req, res, next) {
     next();
   });
 }
+function handleResumeUpload(req, res, next) {
+  resumeUpload.single('file')(req, res, error => {
+    if (error) return res.status(400).json({ success: false, message: error.message });
+    next();
+  });
+}
 
 app.get('/', (req, res) => res.sendFile(path.join(PUBLIC_DIR, 'index.html')));
 app.get('/admin', (req, res) => res.redirect('/admin.html'));
 app.get('/api/skills', (req, res) => res.json(data.skills));
+app.get('/api/education', (req, res) => res.json(data.education));
+app.get('/api/profile', (req, res) => res.json(data.profile));
+app.get('/api/resume', (req, res) => res.json(data.resume));
 app.get('/api/certificates', (req, res) => res.json(data.certificates));
 app.get('/api/projects', (req, res) => res.json(data.projects));
 app.get('/api/chat/replies', (req, res) => res.json(data.chatMessages.filter(message => message.sender === 'assistant')));
@@ -323,25 +367,114 @@ app.post('/api/upload', requireAdmin, handleUpload, async (req, res) => {
   res.json({ success: true, url: `/uploads/${req.file.filename}` });
 });
 
+app.post('/api/resume', requireAdmin, handleResumeUpload, withDataLock, async (req, res) => {
+  if (!req.file) return res.status(400).json({ success: false, message: 'Choose a PDF or DOCX resume to upload.' });
+  const filename = path.basename(req.file.originalname);
+  if (IS_VERCEL) {
+    try {
+      const blob = await put(
+        `portfolio/resume-${Date.now()}-${crypto.randomBytes(8).toString('hex')}${path.extname(filename).toLowerCase()}`,
+        req.file.buffer,
+        { access: 'public', contentType: req.file.mimetype }
+      );
+      data.resume = { filename, url: blob.url, downloadUrl: blob.downloadUrl };
+    } catch (error) {
+      console.error('Could not upload resume to Vercel Blob:', error.message);
+      return res.status(503).json({ success: false, message: 'Resume storage is temporarily unavailable.' });
+    }
+  } else {
+    const url = `/uploads/${encodeURIComponent(req.file.filename)}`;
+    data.resume = { filename, url, downloadUrl: url };
+  }
+  await saveData();
+  res.json({ success: true, data: data.resume });
+});
+app.delete('/api/resume', requireAdmin, withDataLock, async (req, res) => {
+  data.resume = null;
+  await saveData();
+  res.json({ success: true });
+});
+app.put('/api/profile', requireAdmin, withDataLock, async (req, res) => {
+  const { headline, summary, story } = req.body || {};
+  if (!validText(headline, 120) || !validText(summary, 1000) || !validText(story, 3000)) {
+    return res.status(400).json({ success: false, message: 'Enter a headline, summary, and About story within the allowed lengths.' });
+  }
+  data.profile = { headline: headline.trim(), summary: summary.trim(), story: story.trim() };
+  await saveData();
+  res.json({ success: true, data: data.profile });
+});
+app.post('/api/education', requireAdmin, withDataLock, async (req, res) => {
+  const { institution, qualification, fieldOfStudy = '', startYear = '', endYear = '', description, imageUrl = '' } = req.body || {};
+  if (!validText(institution, 160) || !validText(qualification, 160) ||
+      (fieldOfStudy && !validText(fieldOfStudy, 160)) ||
+      (startYear && !validText(startYear, 40)) || (endYear && !validText(endYear, 40)) ||
+      !validText(description, 1000) || !validImageUrl(imageUrl)) {
+    return res.status(400).json({ success: false, message: 'Enter valid education details and an optional image URL.' });
+  }
+  const item = {
+    id: crypto.randomUUID(),
+    institution: institution.trim(),
+    qualification: qualification.trim(),
+    fieldOfStudy: fieldOfStudy.trim(),
+    startYear: startYear.trim(),
+    endYear: endYear.trim(),
+    description: description.trim(),
+    imageUrl
+  };
+  data.education.push(item);
+  await saveData();
+  res.status(201).json({ success: true, data: item });
+});
+app.put('/api/education/:id', requireAdmin, withDataLock, async (req, res) => {
+  const index = findById(data.education, req.params.id);
+  if (index < 0) return res.status(404).json({ success: false, message: 'Education entry not found.' });
+  const { institution, qualification, fieldOfStudy = '', startYear = '', endYear = '', description, imageUrl = '' } = req.body || {};
+  if (!validText(institution, 160) || !validText(qualification, 160) ||
+      (fieldOfStudy && !validText(fieldOfStudy, 160)) ||
+      (startYear && !validText(startYear, 40)) || (endYear && !validText(endYear, 40)) ||
+      !validText(description, 1000) || !validImageUrl(imageUrl)) {
+    return res.status(400).json({ success: false, message: 'Enter valid education details and an optional image URL.' });
+  }
+  data.education[index] = {
+    ...data.education[index],
+    institution: institution.trim(),
+    qualification: qualification.trim(),
+    fieldOfStudy: fieldOfStudy.trim(),
+    startYear: startYear.trim(),
+    endYear: endYear.trim(),
+    description: description.trim(),
+    imageUrl
+  };
+  await saveData();
+  res.json({ success: true, data: data.education[index] });
+});
+app.delete('/api/education/:id', requireAdmin, withDataLock, async (req, res) => {
+  const index = findById(data.education, req.params.id);
+  if (index < 0) return res.status(404).json({ success: false, message: 'Education entry not found.' });
+  data.education.splice(index, 1);
+  await saveData();
+  res.json({ success: true });
+});
+
 app.post('/api/skills', requireAdmin, withDataLock, async (req, res) => {
-  const { name, percentage } = req.body || {};
+  const { name, percentage, imageUrl = '' } = req.body || {};
   const value = Number(percentage);
-  if (!validText(name, 80) || !Number.isInteger(value) || value < 1 || value > 100) {
+  if (!validText(name, 80) || !Number.isInteger(value) || value < 1 || value > 100 || !validImageUrl(imageUrl)) {
     return res.status(400).json({ success: false, message: 'Enter a skill name and a whole-number percentage from 1 to 100.' });
   }
-  const item = { id: crypto.randomUUID(), name: name.trim(), percentage: value };
+  const item = { id: crypto.randomUUID(), name: name.trim(), percentage: value, imageUrl };
   data.skills.push(item); await saveData();
   res.status(201).json({ success: true, data: item });
 });
 app.put('/api/skills/:id', requireAdmin, withDataLock, async (req, res) => {
   const index = findById(data.skills, req.params.id);
   if (index < 0) return res.status(404).json({ success: false, message: 'Skill not found.' });
-  const { name, percentage } = req.body || {};
+  const { name, percentage, imageUrl = '' } = req.body || {};
   const value = Number(percentage);
-  if (!validText(name, 80) || !Number.isInteger(value) || value < 1 || value > 100) {
+  if (!validText(name, 80) || !Number.isInteger(value) || value < 1 || value > 100 || !validImageUrl(imageUrl)) {
     return res.status(400).json({ success: false, message: 'Enter a skill name and a whole-number percentage from 1 to 100.' });
   }
-  data.skills[index] = { ...data.skills[index], name: name.trim(), percentage: value };
+  data.skills[index] = { ...data.skills[index], name: name.trim(), percentage: value, imageUrl };
   await saveData(); res.json({ success: true, data: data.skills[index] });
 });
 app.delete('/api/skills/:id', requireAdmin, withDataLock, async (req, res) => {

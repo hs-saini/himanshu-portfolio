@@ -1,6 +1,6 @@
 # Himanshu Saini Portfolio
 
-Responsive portfolio website with an Express admin studio for skills, certificates, projects, assistant replies, and contact messages.
+Responsive portfolio website with an Express admin studio for About-page content, education, skills, certificates, work, resume downloads, assistant replies, and contact messages. The public portfolio includes an animated entry screen, scroll-triggered cards, and sliding certificate/work galleries.
 
 ## Run locally on Windows
 
@@ -13,19 +13,18 @@ Open `http://localhost:3000`. The admin studio is at `http://localhost:3000/admi
 
 ## Deploy to Vercel
 
-The frontend files are in `public/`, as required for Vercel's static asset CDN. Express serves the API, login, and `/admin` redirect. Content is stored in Upstash Redis and certificate/project images in Vercel Blob, so edits persist across serverless instances.
+The frontend files are in `public/`, as required for Vercel's static asset CDN. Express serves the API, login, and `/admin` redirect. Content, education details, About-page copy, and resume metadata are stored in Upstash Redis. Uploaded images and the downloadable resume are stored in Vercel Blob, so edits persist across serverless instances.
 
 1. Push this project to a GitHub repository. Keep the repository private unless you explicitly want the source code public.
-2. Import the repository into Vercel and set the Vercel project name to `hsaini`. The `hsaini.vercel.app` subdomain must be available.
+2. Import the repository into Vercel and set the Vercel project name to `hsaini`. A Vercel-generated `*.vercel.app` alias is assigned automatically; a preferred alias can only be added if it is available.
 3. Connect an Upstash Redis store and Vercel Blob store to the Vercel project. Their environment variables must be available to the deployment:
-   - `UPSTASH_REDIS_REST_URL`
-   - `UPSTASH_REDIS_REST_TOKEN`
+   - `KV_REST_API_URL` and `KV_REST_API_TOKEN` (or the equivalent `UPSTASH_REDIS_REST_URL` and `UPSTASH_REDIS_REST_TOKEN`)
    - `BLOB_READ_WRITE_TOKEN`
 4. In Vercel Project Settings → Environment Variables, set:
    - `ADMIN_USERNAME` to `admin_saini`
    - `ADMIN_PASSWORD` to a strong, private password that has not been shared publicly
    - `ADMIN_SESSION_SECRET` to a separate, random secret
-5. Redeploy after storage and environment variables are connected, then verify the public site, admin sign-in, editing, contact form, and image uploads.
+5. Redeploy after storage and environment variables are connected, then verify the public site, admin sign-in, education/About editing, certificate and skill images, resume download, contact form, and image uploads.
 
 Do not commit `.env`, `data/`, `uploads/`, or `.vercel/`. The local JSON data file and local image directory are only used during development; Vercel uses Redis and Blob.
 
