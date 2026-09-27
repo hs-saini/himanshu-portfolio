@@ -44,7 +44,7 @@
       <div class="stat"><span>Skills</span><strong id="skillCount">—</strong></div><div class="stat"><span>Education</span><strong id="educationCount">—</strong></div><div class="stat"><span>Certificates</span><strong id="certificateCount">—</strong></div><div class="stat"><span>Projects</span><strong id="projectCount">—</strong></div><div class="stat"><span>Messages</span><strong id="messageCount">—</strong></div>
     </section>
     <nav class="tabs" aria-label="Admin sections">
-      <button class="tab active" data-tab="skills">Skills</button><button class="tab" data-tab="education">Education</button><button class="tab" data-tab="certificates">Certificates</button><button class="tab" data-tab="projects">Work</button><button class="tab" data-tab="about">About page</button><button class="tab" data-tab="resume">Resume</button><button class="tab" data-tab="chat">Chat replies</button><button class="tab" data-tab="messages">Contact messages</button>
+      <button class="tab active" data-tab="skills">Skills</button><button class="tab" data-tab="education">Education</button><button class="tab" data-tab="certificates">Certificates</button><button class="tab" data-tab="projects">Work</button><button class="tab" data-tab="about">About page</button><button class="tab" data-tab="resume">Upload CV</button><button class="tab" data-tab="chat">Chat replies</button><button class="tab" data-tab="messages">Contact messages</button>
     </nav>
     <section class="layout">
       <article class="panel" id="editorPanel">
@@ -75,7 +75,7 @@
         certificates: { title:'Your certificates',form:'Add a certificate',desc:'Upload an image or paste an image URL.', fields:[['title','Certificate title','text'],['description','Description','textarea'],['imageUrl','Image URL (optional)','url'],['file','Upload image (optional)','file']] },
         projects: { title:'Your projects',form:'Add a project',desc:'Showcase work with a title, details, and an image.', fields:[['title','Project title','text'],['description','Description','textarea'],['imageUrl','Image URL (optional)','url'],['file','Upload project image (optional)','file']] },
         about: { title:'About page content',form:'Edit your About page',desc:'These words appear on your portfolio and About page.', fields:[['headline','Role or headline','text'],['summary','Short introduction','textarea'],['story','About story','textarea']] },
-        resume: { title:'Resume download',form:'Upload or replace your resume',desc:'Upload a PDF or DOCX (up to 10 MB). The download button appears on the portfolio.', fields:[['file','Resume file (PDF or DOCX)','file']] },
+        resume: { title:'CV / Resume',form:'Upload or replace your CV',desc:'Choose a PDF or DOCX file up to 10 MB. Your homepage Download CV button activates as soon as the upload finishes.', fields:[['file','Choose your CV (PDF or DOCX)','file']] },
         chat: { title:'Chat replies',form:'Add a chat reply',desc:'These assistant replies can be managed here.', fields:[['sender','Sender','text'],['text','Reply','textarea']] },
         messages: { title:'Contact messages',form:'Inbox',desc:'Messages submitted through your contact form.', fields:[] }
       };

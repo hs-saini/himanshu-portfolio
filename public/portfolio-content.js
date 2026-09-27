@@ -140,15 +140,25 @@
   function setResumeLink(resume) {
     document.querySelectorAll('.resume-download').forEach(link => {
       if (!resume || !(resume.downloadUrl || resume.url)) {
-        link.hidden = true;
-        link.removeAttribute('href');
+        link.href = '#';
+        link.setAttribute('aria-disabled', 'true');
+        link.title = 'Upload your CV from the Admin dashboard to enable this download.';
         return;
       }
       link.href = resume.downloadUrl || resume.url;
       if (link.href.startsWith(location.origin)) link.download = resume.filename || 'Himanshu-Saini-CV';
+      link.removeAttribute('aria-disabled');
+      link.removeAttribute('title');
       link.hidden = false;
     });
+    const note = document.getElementById('resumeDownloadNote');
+    if (note) note.hidden = Boolean(resume && (resume.downloadUrl || resume.url));
   }
+
+  document.addEventListener('click', event => {
+    const link = event.target.closest('.resume-download[aria-disabled="true"]');
+    if (link) event.preventDefault();
+  });
 
   function setupIntro() {
     const intro = document.getElementById('portfolioIntro');
