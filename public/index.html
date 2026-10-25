@@ -920,7 +920,27 @@
                     description.textContent = project.description || '';
                     body.append(title, description);
                     card.appendChild(body);
-                    column.appendChild(card);
+                    let projectUrl = '';
+                    if (typeof project.projectUrl === 'string') {
+                        try {
+                            const parsedUrl = new URL(project.projectUrl);
+                            if (parsedUrl.protocol === 'http:' || parsedUrl.protocol === 'https:') {
+                                projectUrl = parsedUrl.href;
+                            }
+                        } catch {}
+                    }
+                    if (projectUrl) {
+                        const projectLink = document.createElement('a');
+                        projectLink.href = projectUrl;
+                        projectLink.target = '_blank';
+                        projectLink.rel = 'noopener noreferrer';
+                        projectLink.className = 'work-card-link';
+                        projectLink.setAttribute('aria-label', `View ${title.textContent} project (opens in a new tab)`);
+                        projectLink.appendChild(card);
+                        column.appendChild(projectLink);
+                    } else {
+                        column.appendChild(card);
+                    }
                     container.appendChild(column);
                 });
                 if (window.AOS) AOS.refresh();

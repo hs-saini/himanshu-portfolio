@@ -73,7 +73,7 @@
         skills: { title:'Your skills',form:'Add a skill',desc:'Show clients what you do best. Add an optional image or icon.', fields:[['name','Skill name','text'],['percentage','Proficiency (1–100)','number'],['imageUrl','Image URL (optional)','url'],['file','Upload skill image (optional)','file']] },
         education: { title:'Your education',form:'Add education',desc:'Add schools, degrees, and study details to your About page.', fields:[['institution','School or institution','text'],['qualification','Degree or qualification','text'],['fieldOfStudy','Field of study (optional)','text'],['startYear','Start year (optional)','text'],['endYear','End year (or Present)','text'],['description','Details','textarea'],['imageUrl','Image URL (optional)','url'],['file','Upload education image (optional)','file']] },
         certificates: { title:'Your certificates',form:'Add a certificate',desc:'Upload an image or paste an image URL.', fields:[['title','Certificate title','text'],['description','Description','textarea'],['imageUrl','Image URL (optional)','url'],['file','Upload image (optional)','file']] },
-        projects: { title:'Your projects',form:'Add a project',desc:'Showcase work with a title, details, and an image.', fields:[['title','Project title','text'],['description','Description','textarea'],['imageUrl','Image URL (optional)','url'],['file','Upload project image (optional)','file']] },
+        projects: { title:'Your projects',form:'Add a project',desc:'Showcase work with a title, details, an image, and an optional project link.', fields:[['title','Project title','text'],['description','Description','textarea'],['imageUrl','Image URL (optional)','url'],['projectUrl','Project link (optional)','url'],['file','Upload project image (optional)','file']] },
         about: { title:'About page content',form:'Edit your About page',desc:'These words appear on your portfolio and About page.', fields:[['headline','Role or headline','text'],['summary','Short introduction','textarea'],['story','About story','textarea']] },
         resume: { title:'CV / Resume',form:'Upload or replace your CV',desc:'Choose a PDF or DOCX file up to 10 MB. Your homepage Download CV button activates as soon as the upload finishes.', fields:[['file','Choose your CV (PDF or DOCX)','file']] },
         chat: { title:'Chat replies',form:'Add a chat reply',desc:'These assistant replies can be managed here.', fields:[['sender','Sender','text'],['text','Reply','textarea']] },
@@ -97,7 +97,7 @@
         return result;
       }
       function inputMarkup([name, label, type], prefix = '') {
-        const id = `${prefix}${name}`, required = ['file','imageUrl','fieldOfStudy','startYear','endYear'].includes(name) ? '' : 'required';
+        const id = `${prefix}${name}`, required = ['file','imageUrl','projectUrl','fieldOfStudy','startYear','endYear'].includes(name) ? '' : 'required';
         if (type === 'textarea') return `<div class="field"><label for="${id}">${label}</label><textarea id="${id}" name="${name}" maxlength="1000" ${required}></textarea></div>`;
         const accept = type !== 'file' ? '' : activeTab === 'resume' ? 'accept="application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document,.pdf,.docx"' : 'accept="image/jpeg,image/png,image/webp,image/gif"';
         return `<div class="field"><label for="${id}">${label}</label><input class="${type === 'file' ? 'file-input' : ''}" id="${id}" name="${name}" type="${type}" ${accept} ${name==='percentage'?'min="1" max="100"':''} ${required}></div>`;

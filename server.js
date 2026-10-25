@@ -293,6 +293,16 @@ function validImageUrl(value) {
   if (typeof value !== 'string' || value.length > 2000) return false;
   return value.startsWith('/uploads/') || /^https?:\/\/\S+$/i.test(value);
 }
+function validProjectUrl(value) {
+  if (typeof value !== 'string' || value.length > 2000) return false;
+  if (!value.trim()) return true;
+  try {
+    const url = new URL(value.trim());
+    return (url.protocol === 'http:' || url.protocol === 'https:') && Boolean(url.hostname);
+  } catch {
+    return false;
+  }
+}
 function handleUpload(req, res, next) {
   upload.single('file')(req, res, error => {
     if (error) return res.status(400).json({ success: false, message: error.message });
@@ -522,21 +532,21 @@ app.delete('/api/certificates/:id', requireAdmin, withDataLock, async (req, res)
 });
 
 app.post('/api/projects', requireAdmin, withDataLock, async (req, res) => {
-  const { title, description, imageUrl = '' } = req.body || {};
-  if (!validText(title, 120) || !validText(description, 1000) || !validImageUrl(imageUrl)) {
-    return res.status(400).json({ success: false, message: 'Enter a project title, description, and valid image URL.' });
+  const { title, description, imageUrl = '', projectUrl = '' } = req.body || {};
+  if (!validText(title, 120) || !validText(description, 1000) || !validImageUrl(imageUrl) || !validProjectUrl(projectUrl)) {
+    return res.status(400).json({ success: false, message: 'Enter a project title, description, and valid image and project URLs.' });
   }
-  const item = { id: crypto.randomUUID(), title: title.trim(), description: description.trim(), imageUrl };
+  const item = { id: crypto.randomUUID(), title: title.trim(), description: description.trim(), imageUrl, projectUrl: projectUrl.trim() };
   data.projects.push(item); await saveData(); res.status(201).json({ success: true, data: item });
 });
 app.put('/api/projects/:id', requireAdmin, withDataLock, async (req, res) => {
   const index = findById(data.projects, req.params.id);
   if (index < 0) return res.status(404).json({ success: false, message: 'Project not found.' });
-  const { title, description, imageUrl = '' } = req.body || {};
-  if (!validText(title, 120) || !validText(description, 1000) || !validImageUrl(imageUrl)) {
-    return res.status(400).json({ success: false, message: 'Enter a project title, description, and valid image URL.' });
+  const { title, description, imageUrl = '', projectUrl = '' } = req.body || {};
+  if (!validText(title, 120) || !validText(description, 1000) || !validImageUrl(imageUrl) || !validProjectUrl(projectUrl)) {
+    return res.status(400).json({ success: false, message: 'Enter a project title, description, and valid image and project URLs.' });
   }
-  data.projects[index] = { ...data.projects[index], title: title.trim(), description: description.trim(), imageUrl };
+  data.projects[index] = { ...data.projects[index], title: title.trim(), description: description.trim(), imageUrl, projectUrl: projectUrl.trim() };
   await saveData(); res.json({ success: true, data: data.projects[index] });
 });
 app.delete('/api/projects/:id', requireAdmin, withDataLock, async (req, res) => {
